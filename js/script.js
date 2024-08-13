@@ -30,8 +30,57 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+ 
+  const $taskCard = $('<div>', {
+      class: 'card task-card my-3 shadow-sm',
+      'data-task-id': task.id,
+      draggable: true
+  });
 
+  const $cardHeader = $('<div>', {
+      class: 'card-header d-flex justify-content-between align-items-center bg-primary text-white'
+  }).append(
+      $('<span>', { class: 'h5 mb-0', text: task.title }),
+      $('<button>', {
+          class: 'btn-close text-white',
+          click: handleDeleteTask,
+          'data-task-id': task.id,
+          title: 'Delete Task'
+      })
+  );
+
+
+  const $cardBody = $('<div>', { class: 'card-body' });
+  const $cardDescription = $('<p>', { class: 'card-text', text: task.description });
+  const $cardDueDate = $('<p>', { class: 'card-text fw-bold', text: `Due: ${task.dueDate}` });
+
+ 
+  $cardBody.append($cardDescription, $cardDueDate);
+
+ 
+  const now = dayjs();
+  const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+  if (now.isSame(taskDueDate, 'day')) {
+      $taskCard.addClass('bg-warning text-dark');
+  } else if (now.isAfter(taskDueDate)) {
+      $taskCard.addClass('bg-danger text-white');
+      $cardDueDate.addClass('text-light');
+  }
+
+
+  $taskCard.append($cardHeader, $cardBody);
+
+  $taskCard.on('dragstart', function (event) {
+      event.originalEvent.dataTransfer.setData('text/plain', task.id);
+  });
+
+  return $taskCard;
 }
+
+
+
+
+
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
