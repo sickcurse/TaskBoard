@@ -33,10 +33,32 @@
               <h1 class="modal-title fs-5" id="taskModalLabel">Create New Task</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-
-
-
+            <div class="modal-body">
+                <form id="newTaskForm" class="p-3">
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="newTaskTitle" class="form-label">Title</label>
+                      <input autocomplete="off" type="text" class="form-control mb-3" id="newTaskTitle" />
+                    </div>
+                    <div class="col-6">
+                      <label for="newTaskDue" class="form-label">Due Date</label>
+                      <input autocomplete="off" type="text" class="form-control mb-3" id="newTaskDue" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="newTaskDetails" class="form-label">Details</label>
+                      <textarea class="form-control mb-5" id="newTaskDetails" rows="3"></textarea>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskModal">Create Task</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
